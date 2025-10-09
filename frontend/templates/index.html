@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background: #1a1a1a;
+            color: #ffffff;
+            min-height: 100vh;
+            padding: 2rem;
+        }
+        
+        .welcome-section {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .welcome-title {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .welcome-subtitle {
+            font-size: 1rem;
+        }
+        
+        .login-container {
+            display: flex;
+            justify-content: center;
+        }
+        
+        .login-form {
+            background: #2d2d2d;
+            padding: 2rem;
+            border: 1px solid #444;
+            width: 100%;
+            max-width: 350px;
+        }
+        
+        .form-title {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.3rem;
+        }
+        
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #666;
+            background: #333;
+            color: #fff;
+            font-size: 1rem;
+        }
+        
+        input[type="text"]:focus, input[type="password"]:focus {
+            outline: none;
+            border-color: #888;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 0.7rem;
+            background: #444;
+            color: #fff;
+            border: 1px solid #666;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        
+        .submit-btn:hover {
+            background: #555;
+        }
+        
+        .error-message {
+            margin-top: 1rem;
+            padding: 0.5rem;
+            text-align: center;
+            background: #2d2d2d;
+            border: 1px solid #666;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="welcome-section">
+        <h1 class="welcome-title">To-Do App</h1>
+        <p class="welcome-subtitle">Add a new to-do item</p>
+    </div>
+
+    <div class="login-container">
+        <form class="login-form" action="/submittodoitem" method="post">
+            <h2 class="form-title">Add To-Do Item</h2>
+
+            <div class="form-group">
+                <label for="item_name">Item Name:</label>
+                <input type="text" id="item_name" name="item_name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="item_description">Item Description:</label>
+                <textarea id="item_description" name="item_description" rows="4" required style="width: 100%; padding: 0.5rem; border: 1px solid #666; background: #333; color: #fff; font-size: 1rem;"></textarea>
+            </div>
+
+            <button type="submit" class="submit-btn">Add Item</button>
+
+            <!-- Error Message -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        {% if category == 'error' %}
+                            <div class="error-message">
+                                {{ message }}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </form>
+    </div>
+</body>
+</html>
